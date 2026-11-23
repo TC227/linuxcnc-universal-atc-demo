@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/TC227/linuxcnc-universal-atc/blob/main/schemas/hardware-manifest.schema.json",
+  "title": "ATC Hardware Capability Manifest",
+  "description": "Describes verified, detected, simulated or unverified hardware resources.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "manifest_id",
+    "status",
+    "identity",
+    "resources"
+  ],
+  "properties": {
+    "manifest_version": {
+      "const": 1
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "verified",
+        "detected",
+        "unverified",
+        "simulated",
+        "fault"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controller_profile",
+        "board_revision",
+        "hostmot2_firmware_id",
+        "linuxcnc_version"
+      ],
+      "properties": {
+        "controller_profile": {
+          "type": "string"
+        },
+        "board_revision": {
+          "type": "string"
+        },
+        "hostmot2_firmware_id": {
+          "type": "string"
+        },
+        "hostmot2_firmware_sha256": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        },
+        "linuxcnc_version": {
+          "type": "string"
+        }
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "endpoint",
+          "available",
+          "verified"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "digital_input",
+              "digital_output",
+              "encoder",
+              "stepgen",
+              "pwm",
+              "dac",
+              "communication",
+              "analog_input",
+              "analog_output",
+              "internal_hal",
+              "safety"
+            ]
+          },
+          "endpoint": {
+            "type": "string",
+            "minLength": 1
+          },
+          "available": {
+            "type": "boolean"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "reserved_by": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "in_use",
+              "unsupported",
+              "unverified",
+              "fault"
+            ]
+          },
+          "connector": {
+            "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "electrical": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "voltage_domain": {
+                "type": "string"
+              },
+              "supported_active_levels": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "high",
+                    "low"
+                  ]
+                },
+                "uniqueItems": true
+              },
+              "max_current_ma": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "isolated": {
+                "type": "boolean"
+              },
+              "sensor_types": {
+                "type": "array",
+                "items": {
+                  "enum": [
+                    "pnp",
+                    "npn",
+                    "dry_contact",
+                    "push_pull"
+                  ]
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

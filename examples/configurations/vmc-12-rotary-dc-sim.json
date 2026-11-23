@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "config_id": "vmc-12-rotary-dc-sim",
+  "revision": 1,
+  "machine": {
+    "name": "VMC 12 Tool DC Carousel Simulation",
+    "linuxcnc_version": "2.9"
+  },
+  "hardware": {
+    "manifest_id": "sim-linuxcnc-atc-24di-16do-v1"
+  },
+  "atc": {
+    "profile_id": "rotary-disc-v1",
+    "disabled_signals": [],
+    "magazine": {
+      "type": "rotary_disc",
+      "pocket_count": 12,
+      "reference_pocket": 1,
+      "numbering_direction": "cw",
+      "direction_policy": "shortest_path",
+      "reversible": true,
+      "drive": {
+        "type": "dc_motor",
+        "interface": "digital_io"
+      },
+      "position_feedback": {
+        "method": "home_index",
+        "stable_sample_ms": 50
+      }
+    },
+    "transfer": {
+      "mechanism": "direct_pickup",
+      "presentation": { "mode": "magazine_retract" },
+      "drawbar": {
+        "type": "pneumatic",
+        "verification_method": "sensor",
+        "require_air_pressure": true
+      }
+    },
+    "tool_management": { "location_model": "fixed" },
+    "io_mapping": {},
+    "motion_resources": {},
+    "spindle_orientation": {
+      "backend": "servo_native_fixed",
+      "command_interface": "digital_io_fixed_angle",
+      "target_mode": "fixed",
+      "fixed_angle_deg": 180,
+      "require_zero_speed": true,
+      "require_brake_feedback": false
+    },
+    "timeouts_ms": {
+      "magazine_home": 15000,
+      "magazine_index": 10000,
+      "spindle_orient": 8000,
+      "tool_exchange": 12000,
+      "drawbar": 3000,
+      "arm": 5000
+    },
+    "sequence_options": {
+      "require_spindle_stop": true,
+      "require_m19": true,
+      "require_air_pressure": true,
+      "require_tool_present": true,
+      "use_atc_door": true,
+      "max_retries": 0
+    }
+  },
+  "provenance": {
+    "application_version": "0.1.0",
+    "notes": "VMC simulation: 12-tool DC carousel, home/index prox, pneumatic magazine retract, ATC door and pneumatic drawbar."
+  }
+}

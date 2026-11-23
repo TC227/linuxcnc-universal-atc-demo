@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ATC Configuration Validation Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "report_version",
+    "config_id",
+    "configuration_valid",
+    "live_apply_allowed",
+    "summary",
+    "findings",
+    "decisions"
+  ],
+  "properties": {
+    "report_version": {
+      "const": 1
+    },
+    "config_id": {
+      "type": "string"
+    },
+    "configuration_valid": {
+      "type": "boolean"
+    },
+    "live_apply_allowed": {
+      "type": "boolean"
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blocker",
+        "error",
+        "warning",
+        "info"
+      ],
+      "properties": {
+        "blocker": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "error": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warning": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "info": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "severity",
+          "message_th",
+          "affects"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "blocker",
+              "error",
+              "warning",
+              "info"
+            ]
+          },
+          "message_th": {
+            "type": "string"
+          },
+          "affects": {
+            "enum": [
+              "configuration",
+              "apply",
+              "enable_atc"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "go_to_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "resource_id": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "save_draft",
+        "validate",
+        "apply_live",
+        "enable_atc"
+      ],
+      "properties": {
+        "save_draft": {
+          "const": true
+        },
+        "validate": {
+          "type": "boolean"
+        },
+        "apply_live": {
+          "type": "boolean"
+        },
+        "enable_atc": {
+          "const": false
+        }
+      }
+    }
+  }
+}

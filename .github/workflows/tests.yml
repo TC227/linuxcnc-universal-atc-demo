@@ -1,0 +1,27 @@
+name: Configuration Engine Tests
+
+on:
+  push:
+    branches: ["main", "feature/**"]
+  pull_request:
+    branches: ["main", "feature/**"]
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package and test dependencies
+        run: python -m pip install -e ".[test,gui]"
+      - name: Compile Python source and check installer syntax
+        run: |
+          python -m compileall -q src qtvcp scripts
+          bash -n scripts/install_pi4_axis_test.sh
+          bash -n scripts/test_ubuntu_local.sh
+      - name: Run tests
+        run: python -m pytest

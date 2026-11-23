@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "linuxcnc-universal-atc-configurator"
+version = "0.1.0"
+description = "Configuration and validation engine for LinuxCNC Universal ATC"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["jsonschema>=4.21,<5"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<9"]
+gui = ["PyQt5>=5.15,<6"]
+
+[project.scripts]
+atc-config = "atc_configurator.cli:main"
+atc-config-gui = "atc_configurator.gui:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

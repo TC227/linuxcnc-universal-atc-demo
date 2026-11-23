@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "config_id": "example-chain-24-double-arm",
+  "revision": 1,
+  "machine": {
+    "name": "ATC Simulation Example",
+    "linuxcnc_version": "2.9"
+  },
+  "hardware": {
+    "manifest_id": "sim-linuxcnc-atc-24di-16do-v1"
+  },
+  "atc": {
+    "profile_id": "chain-double-arm-v1",
+    "magazine": {
+      "type": "chain",
+      "pocket_count": 24,
+      "drive": {
+        "type": "servo",
+        "interface": "stepgen"
+      },
+      "position_feedback": {
+        "method": "incremental_encoder",
+        "encoder_resource_id": "SIM_ENCODER0"
+      }
+    },
+    "transfer": {
+      "mechanism": "double_arm_180"
+    },
+    "tool_management": {
+      "location_model": "fixed"
+    },
+    "io_mapping": {},
+    "motion_resources": {
+      "magazine_motion": "SIM_STEPGEN0",
+      "magazine_position_encoder": "SIM_ENCODER0"
+    },
+    "spindle_orientation": {
+      "backend": "servo_native_fixed",
+      "command_interface": "digital_io_fixed_angle",
+      "target_mode": "fixed",
+      "fixed_angle_deg": 180
+    },
+    "timeouts_ms": {
+      "magazine_home": 15000,
+      "magazine_index": 10000,
+      "spindle_orient": 8000,
+      "tool_exchange": 12000
+    }
+  }
+}

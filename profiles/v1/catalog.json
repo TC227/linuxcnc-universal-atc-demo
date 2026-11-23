@@ -1,0 +1,260 @@
+{
+  "catalog_version": 1,
+  "profiles": [
+    {
+      "id": "umbrella-parasol-v1",
+      "name_th": "Umbrella / Parasol",
+      "magazine_type": "umbrella",
+      "supported_transfer_mechanisms": [
+        "direct_pickup",
+        "pot_movement",
+        "single_arm"
+      ],
+      "supported_position_feedback": [
+        "home_index",
+        "gray_code",
+        "binary_code",
+        "bcd",
+        "per_pocket",
+        "incremental_encoder",
+        "absolute_encoder",
+        "open_loop_step_count"
+      ],
+      "pocket_count": {
+        "min": 1,
+        "max": 50
+      },
+      "signals": [
+        {
+          "id": "DRAWBAR_CLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "TOOL_PRESENT_SPINDLE",
+          "direction": "input",
+          "requirement": "optional"
+        },
+        {
+          "id": "DRAWBAR_CLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        }
+      ],
+      "transfer_signals": {}
+    },
+    {
+      "id": "rotary-disc-v1",
+      "name_th": "Rotary Disc / Carousel",
+      "magazine_type": "rotary_disc",
+      "supported_transfer_mechanisms": [
+        "direct_pickup",
+        "single_arm",
+        "double_arm_180"
+      ],
+      "supported_position_feedback": [
+        "home_index",
+        "gray_code",
+        "binary_code",
+        "bcd",
+        "per_pocket",
+        "incremental_encoder",
+        "absolute_encoder",
+        "open_loop_step_count"
+      ],
+      "pocket_count": {
+        "min": 2,
+        "max": 128
+      },
+      "signals": [
+        {
+          "id": "DRAWBAR_CLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "TOOL_PRESENT_SPINDLE",
+          "direction": "input",
+          "requirement": "optional"
+        },
+        {
+          "id": "DRAWBAR_CLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        }
+      ],
+      "transfer_signals": {}
+    },
+    {
+      "id": "side-mounted-double-arm-v1",
+      "name_th": "Side-mounted Magazine",
+      "magazine_type": "side_mounted",
+      "supported_transfer_mechanisms": [
+        "direct_pickup",
+        "single_arm",
+        "double_arm_180"
+      ],
+      "supported_position_feedback": [
+        "home_index",
+        "gray_code",
+        "binary_code",
+        "bcd",
+        "incremental_encoder",
+        "absolute_encoder",
+        "open_loop_step_count"
+      ],
+      "pocket_count": {
+        "min": 2,
+        "max": 128
+      },
+      "signals": [
+        {
+          "id": "DRAWBAR_CLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "TOOL_PRESENT_SPINDLE",
+          "direction": "input",
+          "requirement": "optional"
+        },
+        {
+          "id": "DRAWBAR_CLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        }
+      ],
+      "transfer_signals": {}
+    },
+    {
+      "id": "chain-double-arm-v1",
+      "name_th": "Chain Magazine",
+      "magazine_type": "chain",
+      "supported_transfer_mechanisms": [
+        "direct_pickup",
+        "single_arm",
+        "double_arm_180"
+      ],
+      "supported_position_feedback": [
+        "home_index",
+        "gray_code",
+        "binary_code",
+        "bcd",
+        "incremental_encoder",
+        "absolute_encoder",
+        "drive_in_position",
+        "open_loop_step_count"
+      ],
+      "pocket_count": {
+        "min": 4,
+        "max": 256
+      },
+      "signals": [
+        {
+          "id": "DRAWBAR_CLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "TOOL_PRESENT_SPINDLE",
+          "direction": "input",
+          "requirement": "optional"
+        },
+        {
+          "id": "DRAWBAR_CLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        }
+      ],
+      "transfer_signals": {}
+    },
+    {
+      "id": "linear-rack-v1",
+      "name_th": "Linear Rack",
+      "magazine_type": "linear_rack",
+      "supported_transfer_mechanisms": [
+        "direct_pickup",
+        "single_arm"
+      ],
+      "supported_position_feedback": [
+        "home_index",
+        "incremental_encoder",
+        "absolute_encoder",
+        "drive_in_position",
+        "open_loop_step_count"
+      ],
+      "pocket_count": {
+        "min": 2,
+        "max": 128
+      },
+      "signals": [
+        {
+          "id": "DRAWBAR_CLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMPED",
+          "direction": "input",
+          "requirement": "required"
+        },
+        {
+          "id": "TOOL_PRESENT_SPINDLE",
+          "direction": "input",
+          "requirement": "optional"
+        },
+        {
+          "id": "DRAWBAR_CLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        },
+        {
+          "id": "DRAWBAR_UNCLAMP_CMD",
+          "direction": "output",
+          "requirement": "required"
+        }
+      ],
+      "transfer_signals": {}
+    }
+  ]
+}

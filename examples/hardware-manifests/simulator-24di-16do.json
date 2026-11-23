@@ -1,0 +1,489 @@
+{
+  "manifest_version": 1,
+  "manifest_id": "sim-linuxcnc-atc-24di-16do-v1",
+  "status": "simulated",
+  "identity": {
+    "controller_profile": "linuxcnc-simulator",
+    "board_revision": "SIMULATED",
+    "hostmot2_firmware_id": "SIMULATOR-NOT-HARDWARE",
+    "linuxcnc_version": "2.9-sim"
+  },
+  "resources": [
+    {
+      "id": "SIM_DI00",
+      "type": "digital_input",
+      "endpoint": "sim://DI00",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI01",
+      "type": "digital_input",
+      "endpoint": "sim://DI01",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI02",
+      "type": "digital_input",
+      "endpoint": "sim://DI02",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI03",
+      "type": "digital_input",
+      "endpoint": "sim://DI03",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI04",
+      "type": "digital_input",
+      "endpoint": "sim://DI04",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI05",
+      "type": "digital_input",
+      "endpoint": "sim://DI05",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI06",
+      "type": "digital_input",
+      "endpoint": "sim://DI06",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI07",
+      "type": "digital_input",
+      "endpoint": "sim://DI07",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI08",
+      "type": "digital_input",
+      "endpoint": "sim://DI08",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI09",
+      "type": "digital_input",
+      "endpoint": "sim://DI09",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI10",
+      "type": "digital_input",
+      "endpoint": "sim://DI10",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI11",
+      "type": "digital_input",
+      "endpoint": "sim://DI11",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI12",
+      "type": "digital_input",
+      "endpoint": "sim://DI12",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI13",
+      "type": "digital_input",
+      "endpoint": "sim://DI13",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI14",
+      "type": "digital_input",
+      "endpoint": "sim://DI14",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI15",
+      "type": "digital_input",
+      "endpoint": "sim://DI15",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI16",
+      "type": "digital_input",
+      "endpoint": "sim://DI16",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI17",
+      "type": "digital_input",
+      "endpoint": "sim://DI17",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI18",
+      "type": "digital_input",
+      "endpoint": "sim://DI18",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI19",
+      "type": "digital_input",
+      "endpoint": "sim://DI19",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI20",
+      "type": "digital_input",
+      "endpoint": "sim://DI20",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI21",
+      "type": "digital_input",
+      "endpoint": "sim://DI21",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI22",
+      "type": "digital_input",
+      "endpoint": "sim://DI22",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DI23",
+      "type": "digital_input",
+      "endpoint": "sim://DI23",
+      "available": true,
+      "verified": true,
+      "electrical": {
+        "supported_active_levels": [
+          "high",
+          "low"
+        ]
+      }
+    },
+    {
+      "id": "SIM_DO00",
+      "type": "digital_output",
+      "endpoint": "sim://DO00",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO01",
+      "type": "digital_output",
+      "endpoint": "sim://DO01",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO02",
+      "type": "digital_output",
+      "endpoint": "sim://DO02",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO03",
+      "type": "digital_output",
+      "endpoint": "sim://DO03",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO04",
+      "type": "digital_output",
+      "endpoint": "sim://DO04",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO05",
+      "type": "digital_output",
+      "endpoint": "sim://DO05",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO06",
+      "type": "digital_output",
+      "endpoint": "sim://DO06",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO07",
+      "type": "digital_output",
+      "endpoint": "sim://DO07",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO08",
+      "type": "digital_output",
+      "endpoint": "sim://DO08",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO09",
+      "type": "digital_output",
+      "endpoint": "sim://DO09",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO10",
+      "type": "digital_output",
+      "endpoint": "sim://DO10",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO11",
+      "type": "digital_output",
+      "endpoint": "sim://DO11",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO12",
+      "type": "digital_output",
+      "endpoint": "sim://DO12",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO13",
+      "type": "digital_output",
+      "endpoint": "sim://DO13",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO14",
+      "type": "digital_output",
+      "endpoint": "sim://DO14",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_DO15",
+      "type": "digital_output",
+      "endpoint": "sim://DO15",
+      "available": true,
+      "verified": true
+    },
+    {
+      "id": "SIM_STEPGEN0",
+      "type": "stepgen",
+      "endpoint": "sim://stepgen/0",
+      "available": true,
+      "verified": true,
+      "capabilities": [
+        "step_dir"
+      ]
+    },
+    {
+      "id": "SIM_STEPGEN1",
+      "type": "stepgen",
+      "endpoint": "sim://stepgen/1",
+      "available": true,
+      "verified": true,
+      "capabilities": [
+        "step_dir"
+      ]
+    },
+    {
+      "id": "SIM_ENCODER0",
+      "type": "encoder",
+      "endpoint": "sim://encoder/0",
+      "available": true,
+      "verified": true,
+      "capabilities": [
+        "quadrature",
+        "index"
+      ]
+    },
+    {
+      "id": "SIM_ENCODER1",
+      "type": "encoder",
+      "endpoint": "sim://encoder/1",
+      "available": true,
+      "verified": true,
+      "capabilities": [
+        "quadrature",
+        "index"
+      ]
+    },
+    {
+      "id": "SIM_BUS0",
+      "type": "communication",
+      "endpoint": "sim://bus/0",
+      "available": true,
+      "verified": true,
+      "capabilities": [
+        "generic"
+      ]
+    }
+  ]
+}
