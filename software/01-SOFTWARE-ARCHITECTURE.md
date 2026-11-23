@@ -1,4 +1,4 @@
-# Software 1 — สถาปัตยกรรม Software
+# สถาปัตยกรรมซอฟต์แวร์ ATC
 
 สถานะ: **DRAFT**
 
@@ -47,4 +47,4 @@ GUI ใช้แก้และบันทึก Configuration เท่าน�
 
 ## 6. Review / Validate / Apply Transaction
 
-Configuration Manager ต้องสร้าง Candidate ใน Staging, Validate กับ Hardware Capability Manifest และ Machine State, แสดง Diff, Backup Managed Files, ติดตั้งแบบควบคุม, Post-load Verify และ Rollback ได้ตาม [Review, Validate & Apply Screen V1](12-REVIEW-VALIDATE-APPLY-SCREEN-V1.md). Apply สำเร็จแล้ว ATC ต้องคง Disabled จนผ่าน Commissioning และ Operator Enable แยกต่างหาก
+Configuration Manager ต้องสร้าง Candidate ใน Staging, Validate กับ Hardware Capability Manifest และ Machine State, แสดง Diff, Backup Managed Files, ติดตั้งแบบควบคุม, Post-load Verify และ Rollback ได้ตาม [GUI Configuration Flow V1](05-GUI-CONFIGURATION-FLOW-V1.md) และ [Configuration Engine V1](../docs/CONFIGURATION-ENGINE-V1.md). Apply สำเร็จแล้ว ATC ต้องคง Disabled จนผ่าน Commissioning และ Operator Enable แยกต่างหาก

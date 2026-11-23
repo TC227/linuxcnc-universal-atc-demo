@@ -1,4 +1,4 @@
-# Software 5 — GUI Configuration Flow V1
+# ลำดับการตั้งค่า GUI V1
 
 สถานะ: **DRAFT — ข้อกำหนด UX/Workflow ก่อนพัฒนา QtVCP**
 
@@ -306,11 +306,11 @@ Output Test ต้องใช้ Maintenance Mode, ตรวจ Machine State �
 เอกสารนี้เป็น UX/Workflow Specification สำหรับเริ่มทำหน้าจอและ Data Model ยังไม่ใช่ GUI ที่ Implemented แล้ว และยังไม่ยืนยัน Hardware Capability ของ 7i92 + 7i76 หรือ 7i76 สองชุดจนกว่าจะตรวจ HostMot2/Bitfile/SmartSerial จริง
 
 
-## Step 7 — I/O Mapping & Automatic Assignment
+## ขั้นตอนที่ 7 — การกำหนด I/O และการจัดสรรอัตโนมัติ
 
-รายละเอียดหน้า 7 สำหรับ Hardware Manifest, Resource Reservation, Auto-map, Manual Override, Electrical Compatibility และ Diagnostics อยู่ใน [I/O Mapping & Automatic Assignment Screen V1](11-IO-MAPPING-SCREEN-V1.md)
+รายละเอียดการตรวจ Hardware Manifest, Resource Reservation, Auto-map, Manual Override, ความเข้ากันได้ทางไฟฟ้า และ Diagnostics อยู่ใน [Configuration Engine V1](../docs/CONFIGURATION-ENGINE-V1.md) และ [รูปแบบไฟล์ Configuration](04-CONFIGURATION-FORMAT.md)
 
 
-## Wizard Page 8 — Review / Validate / Apply
+## หน้า Wizard 8 — ตรวจทาน / ตรวจสอบ / สร้าง Candidate
 
-รายละเอียดหน้า 8/8 สำหรับ Hardware/Profile Summary, Validation 9 กลุ่ม, Severity, Apply Transaction, Staging, Diff, Backup/Rollback, Post-load Verification และ Commissioning แยกจาก Enable ATC อยู่ใน [Review, Validate & Apply Screen V1](12-REVIEW-VALIDATE-APPLY-SCREEN-V1.md)
+ขั้นตอนสุดท้ายต้องแสดง Hardware/Profile Summary, ผล Validation, ระดับความรุนแรงของปัญหา, Apply Transaction, Staging, Diff, Backup/Rollback, Post-load Verification และ Commissioning โดยแยกจากการ Enable ATC อย่างชัดเจน

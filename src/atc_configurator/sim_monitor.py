@@ -52,7 +52,7 @@ class SimMonitor(QDialog):
         self.sequence.setMaximumWidth(330)
         columns.addWidget(self.sequence)
         self.io = QTableWidget(0,5)
-        self.io.setHorizontalHeaderLabels(["ประเภท","Logical signal","ขา I/O","ค่า","สถานะ"])
+        self.io.setHorizontalHeaderLabels(["ประเภท","สัญญาณ Logical","ขา I/O","ค่า","สถานะ"])
         self.io.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.io.horizontalHeader().setStretchLastSection(True)
         self.io.setEditTriggers(QTableWidget.NoEditTriggers)

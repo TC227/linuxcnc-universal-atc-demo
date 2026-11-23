@@ -57,4 +57,4 @@ Brake อาจใช้ยึด Spindle หลังจัดตำแหน�
 
 ## 5.8 GUI Configurator และ Servo Native Orientation
 
-ข้อกำหนดหน้าจอ Wizard หน้า 6 ซึ่งใช้ LinuxCNC M19 เป็นคำสั่งมาตรฐาน และรองรับ LinuxCNC Encoder/PID, Servo Drive Native Orientation และ External Orientation Controller อยู่ใน [Spindle Orientation / M19 Configurator Screen V1](../software/10-SPINDLE-ORIENTATION-M19-SCREEN-V1.md)
+ข้อกำหนดการตั้งค่า Wizard หน้า 6 ซึ่งใช้ LinuxCNC M19 เป็นคำสั่งมาตรฐาน และรองรับ LinuxCNC Encoder/PID, Servo Drive Native Orientation และ External Orientation Controller อธิบายไว้ใน [QtVCP ATC Configurator](../software/03-QTVCP-CONFIGURATOR.md) และ [GUI Configuration Flow V1](../software/05-GUI-CONFIGURATION-FLOW-V1.md)

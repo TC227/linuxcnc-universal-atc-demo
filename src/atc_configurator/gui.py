@@ -34,7 +34,7 @@ from .generator import generate_candidate
 PAGE_TITLES = [
     "1  ฮาร์ดแวร์",
     "2  ประเภท ATC",
-    "3  Magazine",
+    "3  แมกกาซีน",
     "4  กลไกส่งทูล",
     "5  ระบบ Feedback",
     "6  จัดแนว Spindle (M19)",
@@ -298,8 +298,8 @@ if _QT_IMPORT_ERROR is None:
                 form.addRow("Reference Pocket", self.reference_pocket)
 
                 self.numbering_combo = self._combo(
-                    [("cw", "CW"), ("ccw", "CCW"), ("forward", "Forward"), ("reverse", "Reverse"),
-                     ("positive", "Positive"), ("negative", "Negative")],
+                    [("cw", "CW"), ("ccw", "CCW"), ("forward", "เดินหน้า"), ("reverse", "ถอยหลัง"),
+                     ("positive", "ทิศบวก"), ("negative", "ทิศลบ")],
                     lambda value: self._set("atc.magazine.numbering_direction", value),
                 )
                 form.addRow("ทิศทางหมายเลข Pocket", self.numbering_combo)
@@ -690,14 +690,14 @@ if _QT_IMPORT_ERROR is None:
                 counts[resource["type"]] = counts.get(resource["type"], 0) + 1
             self.manifest_summary.setText(
                 f"<b>สถานะ:</b> {self.model.manifest['status'].upper()}<br>"
-                f"<b>Controller:</b> {identity['controller_profile']}<br>"
-                f"<b>Board Revision:</b> {identity['board_revision']}<br>"
+                f"<b>ตัวควบคุม:</b> {identity['controller_profile']}<br>"
+                f"<b>Revision บอร์ด:</b> {identity['board_revision']}<br>"
                 f"<b>HostMot2:</b> {identity['hostmot2_firmware_id']}<br>"
                 f"<b>LinuxCNC:</b> {identity['linuxcnc_version']}<br>"
-                f"<b>Resources:</b> " + ", ".join(f"{key}: {value}" for key, value in sorted(counts.items()))
+                f"<b>ทรัพยากร:</b> " + ", ".join(f"{key}: {value}" for key, value in sorted(counts.items()))
             )
             self.profile_summary.setText(
-                f"Magazine Type: {self.model.profile['magazine_type']} | "
+                f"ประเภท Magazine: {self.model.profile['magazine_type']} | "
                 f"Pocket range ใน Profile: {self.model.profile['pocket_count']['min']}–{self.model.profile['pocket_count']['max']} "
                 f"(ขีดจำกัดนี้เป็นข้อมูล Profile รุ่นทดลอง ไม่ใช่การรับรองกลไกจริง)"
             )
@@ -734,7 +734,7 @@ if _QT_IMPORT_ERROR is None:
             self.side_motion_combo.setVisible(magazine["type"] == "side_mounted")
             self.disc_layout_combo.setVisible(magazine["type"] == "rotary_disc")
             self.magazine_note.setText(
-                "Shortest Path ใช้ได้เมื่อเลือก Drive แบบ Reversible เท่านั้น. "
+                "การเลือกเส้นทางระยะสั้นที่สุดใช้ได้เมื่อเลือก Drive แบบกลับทิศทางได้เท่านั้น "
                 "Random Pocket จะถูก Block จนกว่าจะมี Runtime Tool Location Manager และ Recovery ที่ผ่านการทดสอบ."
             )
 
@@ -781,7 +781,7 @@ if _QT_IMPORT_ERROR is None:
             self.stable_sample.setValue(feedback.get("stable_sample_ms", 50))
             self.encoder_combo.setVisible(feedback["method"] in ("incremental_encoder", "absolute_encoder"))
             self.feedback_summary.setText(
-                f"Logical signals: {', '.join(item['id'] for item in specs if item['id'].startswith(('MAG_', 'POT_')))}"
+                f"Logical Signal: {', '.join(item['id'] for item in specs if item['id'].startswith(('MAG_', 'POT_')))}"
             )
 
             spindle = atc["spindle_orientation"]
@@ -803,8 +803,8 @@ if _QT_IMPORT_ERROR is None:
             self.zero_speed_check.setChecked(spindle.get("require_zero_speed", True))
             self.brake_check.setChecked(spindle.get("require_brake_feedback", False))
             self.m19_note.setText(
-                "LinuxCNC M19 เป็น Internal HAL Handshake ไม่ใช่ Physical DO. "
-                "Target Angle และ In-position ต้องมาจาก Backend/Feedback ที่เลือก; Timer เพียงอย่างเดียวไม่ยืนยัน Orientation."
+                "LinuxCNC M19 เป็น Internal HAL Handshake ไม่ใช่ Physical DO "
+                "มุมเป้าหมายและ In-position ต้องมาจาก Backend/Feedback ที่เลือก Timer เพียงอย่างเดียวไม่สามารถยืนยัน Orientation ได้"
             )
 
             self._populate_resource_combo(self.magazine_stepgen_combo, "stepgen", atc.get("motion_resources", {}).get("magazine_motion", ""))
@@ -879,7 +879,7 @@ if _QT_IMPORT_ERROR is None:
                 if spec["requirement"] in ("required", "conditional") and spec["id"] in mapping
             )
             self.mapping_summary.setText(
-                f"Mapped: {assigned}/{len(specs)} signals | Required/Conditional mapped: {mapped_required}/{required}"
+                f"กำหนดแล้ว: {assigned}/{len(specs)} signals | Required/Conditional ที่กำหนดแล้ว: {mapped_required}/{required}"
             )
             self._refresh_review_summary()
 
@@ -915,7 +915,7 @@ if _QT_IMPORT_ERROR is None:
             result = self.model.auto_assign_io()
             self._invalidate_report()
             self._refresh_io_table()
-            message = f"Auto-map เสร็จ: Required ที่ยังไม่ได้ Map {len(result['unmapped_required'])} รายการ"
+            message = f"จัดสรร I/O อัตโนมัติเสร็จ: Required ที่ยังไม่ได้กำหนด {len(result['unmapped_required'])} รายการ"
             if result["unmapped_required"]:
                 message += "\n" + ", ".join(result["unmapped_required"])
             QMessageBox.information(self, "จัดสรร I/O ATC อัตโนมัติ", message)
@@ -949,8 +949,8 @@ if _QT_IMPORT_ERROR is None:
             self._last_report = report
             summary = report["summary"]
             lines = [
-                f"Configuration ถูกต้อง: {'YES' if report['configuration_valid'] else 'NO'}",
-                f"อนุญาต Live Apply: {'YES' if report['live_apply_allowed'] else 'NO'}",
+                f"Configuration ถูกต้อง: {'ใช่' if report['configuration_valid'] else 'ไม่ใช่'}",
+                f"อนุญาต Live Apply: {'ใช่' if report['live_apply_allowed'] else 'ไม่ใช่'}",
                 f"รายการขัดขวาง {summary['blocker']} | ข้อผิดพลาด {summary['error']} | คำเตือน {summary['warning']} | ข้อมูล {summary['info']}",
                 "",
             ]

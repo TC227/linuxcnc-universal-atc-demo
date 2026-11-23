@@ -1,4 +1,4 @@
-# Software 03 — QtVCP ATC Configurator
+# ตัวตั้งค่า ATC ผ่าน QtVCP
 
 สถานะ: **DRAFT — GUI-first**
 
@@ -87,31 +87,8 @@ Output Test ต้องตรวจ Machine State และ Interlock ก่อ
 เอกสารนี้เป็นข้อกำหนด UX/Workflow ยังไม่ใช่ GUI ที่ Implemented และยังไม่รับรอง Hardware Capability ของ 7i92 + 7i76 หรือ 7i76 สองชุด
 
 
-## UX Screen Specification
+## รายละเอียดหน้าจอ Wizard
 
-รายละเอียด Wireframe และ Interaction ของหน้า Hardware Selection และ ATC Type อยู่ใน [Wizard Screen Design V1](06-WIZARD-SCREEN-DESIGN-V1.md)
+ลำดับหน้าจอทั้ง 8 ขั้นตอน ตั้งแต่เลือก Hardware, ATC Type, Magazine, Transfer, Position Feedback, M19, I/O Mapping จนถึง Review/Validate/Apply อธิบายไว้ใน [GUI Configuration Flow V1](05-GUI-CONFIGURATION-FLOW-V1.md)
 
-
-## Transfer Mechanism Screen
-
-ข้อกำหนดหน้า 4 สำหรับ Direct Pickup, Moving Pot, Single Arm และ Double Arm อยู่ใน [Transfer Mechanism Screen V1](08-TRANSFER-MECHANISM-SCREEN-V1.md)
-
-
-## Position Feedback & Calibration Screen
-
-ข้อกำหนดหน้า 5 สำหรับ Pocket Identification, Drive Feedback, Homing และ Calibration อยู่ใน [Position Feedback & Calibration Screen V1](09-POSITION-FEEDBACK-CALIBRATION-SCREEN-V1.md)
-
-
-## Spindle Orientation / M19 Screen
-
-หน้า 6 ใช้ LinuxCNC M19 เป็น G-code Interface มาตรฐาน และตั้งค่า Backend ได้ทั้ง LinuxCNC Encoder/PID, Servo Drive Native Orientation และ External Controller ตาม [Spindle Orientation / M19 Configurator Screen V1](10-SPINDLE-ORIENTATION-M19-SCREEN-V1.md)
-
-
-## I/O Mapping & Automatic Assignment Screen
-
-ข้อกำหนดหน้า 7 สำหรับ Logical-to-Physical Mapping, Hardware Manifest, Auto-map, Manual Override, Electrical Validation และ Diagnostics อยู่ใน [I/O Mapping & Automatic Assignment Screen V1](11-IO-MAPPING-SCREEN-V1.md)
-
-
-## Review, Validate & Apply Screen
-
-ข้อกำหนด Wizard หน้า 8/8 สำหรับ Configuration Summary, Validation Engine, Staging, Diff, Backup, Apply, Post-load Verification, Commissioning และ Rollback อยู่ใน [Review, Validate & Apply Screen V1](12-REVIEW-VALIDATE-APPLY-SCREEN-V1.md)
+การตรวจ Hardware Manifest, การจัดสรร Resource, การตรวจ Configuration และการสร้าง Candidate อธิบายเพิ่มเติมใน [Configuration Engine V1](../docs/CONFIGURATION-ENGINE-V1.md) และ [รูปแบบไฟล์ Configuration](04-CONFIGURATION-FORMAT.md)

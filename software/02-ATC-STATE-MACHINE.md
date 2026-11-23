@@ -1,4 +1,4 @@
-# Software 2 — ATC State Machine
+# ATC State Machine — ลำดับสถานะการทำงาน
 
 สถานะ: **DRAFT**
 
