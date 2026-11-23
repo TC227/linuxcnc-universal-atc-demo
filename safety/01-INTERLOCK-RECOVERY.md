@@ -1,42 +1,83 @@
-# Safety 01 — Interlocks, Faults and Recovery
+# Safety 01 — Interlock, Fault และ Recovery
 
-สถานะ: DRAFT — machine-specific safety review required.
+สถานะ: **DRAFT — ต้องตรวจสอบความปลอดภัยตามเครื่องจักรแต่ละรุ่น**
 
-## Fundamental boundary
+## ขอบเขตความปลอดภัยพื้นฐาน
 
-LinuxCNC, HAL, QtVCP and ATC Manager are not safety-rated by default. E-stop, guard interlock, STO, hazardous-energy isolation and required safety functions must use suitable safety components and machine-specific risk assessment.
+LinuxCNC, HAL, QtVCP และ ATC Manager ไม่ใช่ระบบควบคุมที่ได้รับการรับรองด้านความปลอดภัย (Safety-rated) โดยอัตโนมัติ
 
-## Typical process permissives
+วงจร E-stop, Guard Interlock, STO, การแยกพลังงานอันตราย และฟังก์ชันความปลอดภัยที่จำเป็น ต้องใช้อุปกรณ์ Safety ที่เหมาะสม พร้อมการประเมินความเสี่ยงเฉพาะเครื่องจักร
 
-Depending on machine: E-stop chain healthy, guard closed/locked, air pressure adequate, spindle speed zero, spindle orientation complete, axes at exchange position, magazine at exchange station, drive ready, drawbar and arm states valid.
+## เงื่อนไขอนุญาตให้เริ่มกระบวนการ
 
-These process permissives are not a substitute for certified safety functions.
+ขึ้นอยู่กับเครื่องจักร อาจต้องตรวจสอบเงื่อนไขต่อไปนี้ก่อนเริ่ม ATC:
 
-## Sensor plausibility
+- วงจร E-stop อยู่ในสถานะปกติ
+- ประตู Guard ปิดและล็อกแล้ว
+- แรงดันลมเพียงพอ
+- ความเร็ว Spindle เป็นศูนย์
+- Spindle Orientation เสร็จสมบูรณ์
+- แกนเครื่องอยู่ตำแหน่งเปลี่ยนทูล
+- Magazine อยู่ที่สถานีเปลี่ยนทูล
+- Drive พร้อมทำงาน
+- สถานะ Drawbar และแขนเปลี่ยนทูลถูกต้อง
 
-Detect contradictory states, for example POT_UP and POT_DOWN simultaneously, ARM_HOME and ARM_180 simultaneously where impossible, DRAWBAR_CLAMPED and DRAWBAR_UNCLAMPED together, gripper open and closed together, or encoder position inconsistent with pocket sensor.
+เงื่อนไขอนุญาตให้ทำงานเหล่านี้เป็น Process Interlock เท่านั้น ไม่สามารถใช้แทน Safety Function ที่ได้รับการรับรองได้
 
-The plausibility matrix is profile-specific.
+## การตรวจสอบความสมเหตุสมผลของ Sensor
 
-## Output behavior
+ต้องตรวจจับสถานะที่ขัดแย้งกัน เช่น:
 
-For every output define safe behavior at power-up, LinuxCNC shutdown, watchdog timeout, field-power loss and communication loss. Do not assume all outputs OFF is mechanically safe; a suspended tool or loaded arm may require a designed holding/braking strategy.
+- `POT_UP` และ `POT_DOWN` ON พร้อมกัน ทั้งที่กลไกไม่สามารถอยู่สองตำแหน่งพร้อมกันได้
+- `ARM_HOME` และ `ARM_180` ON พร้อมกัน ในระบบที่สถานะดังกล่าวเป็นไปไม่ได้
+- `DRAWBAR_CLAMPED` และ `DRAWBAR_UNCLAMPED` ON พร้อมกัน
+- Gripper แสดงสถานะเปิดและปิดพร้อมกัน
+- ตำแหน่ง Encoder ไม่สอดคล้องกับ Sensor ประจำ Pocket
 
-## Recovery after interruption
+เงื่อนไขตรวจสอบความสมเหตุสมผลต้องกำหนดตาม ATC Profile ของแต่ละกลไก
 
-1. Mark unverified mechanism states UNKNOWN.
-2. Read physical sensors and drive feedback.
-3. Never infer position from last commanded position alone.
-4. Block automatic M6 until state is reconciled.
-5. Present guided recovery.
-6. Permit controlled manual movement only under appropriate maintenance conditions.
-7. Verify spindle, drawbar, arm, gripper and magazine states.
-8. Reconcile tool/pocket occupancy before resuming automatic operation.
+## พฤติกรรมของ Output
 
-## Manual mode
+ทุก Output ต้องระบุ Safe Behavior เมื่อเกิดเหตุการณ์ต่อไปนี้:
 
-Use explicit maintenance mode, hold-to-run where appropriate, one motion at a time, speed/pressure limits, clear warnings and interlock checks. Never bypass required safety-rated functions.
+- เปิดระบบหรือจ่ายไฟครั้งแรก
+- LinuxCNC ปิดตัวลง
+- Watchdog Timeout
+- Field Power หาย
+- การสื่อสารขาดหาย
 
-## Validation tests
+ห้ามสมมติว่า Output ทุกช่อง OFF คือสถานะปลอดภัยทางกลเสมอไป เพราะ Tool ที่แขวนอยู่หรือแขนที่รับน้ำหนักอาจต้องมีระบบ Holding หรือ Brake ที่ออกแบบไว้โดยเฉพาะ
 
-Sensor stuck ON/OFF, wire break, field power loss, output short, drive fault, watchdog loss, spindle fails to stop, M19 timeout, magazine overshoot, tool not captured, drawbar mismatch and power loss at each critical state.
+## การกู้คืนหลังการหยุดชะงัก
+
+1. กำหนดสถานะกลไกที่ยังยืนยันไม่ได้เป็น `UNKNOWN`
+2. อ่านสถานะ Sensor ทางกายภาพและ Feedback จาก Drive ใหม่
+3. ห้ามอนุมานตำแหน่งจากค่าคำสั่งล่าสุดเพียงอย่างเดียว
+4. ระงับคำสั่ง M6 อัตโนมัติจนกว่าสถานะจะถูกตรวจสอบและปรับให้ตรงกัน
+5. แสดงขั้นตอน Guided Recovery ให้ผู้ปฏิบัติงาน
+6. อนุญาตให้ขยับกลไกด้วยมืออย่างควบคุมได้ เฉพาะภายใต้เงื่อนไขซ่อมบำรุงที่เหมาะสม
+7. ตรวจสอบสถานะ Spindle, Drawbar, Arm, Gripper และ Magazine
+8. ตรวจสอบข้อมูล Tool/Pocket Occupancy ให้ตรงกับสภาพทางกายภาพก่อนกลับไปใช้ Automatic Operation
+
+## Manual Mode
+
+ควรใช้ Maintenance Mode ที่ระบุชัดเจน ใช้ Hold-to-run เมื่อเหมาะสม ขยับทีละกลไก จำกัดความเร็วและแรงดัน มีคำเตือนที่มองเห็นได้ชัด และตรวจ Interlock ทุกครั้ง
+
+ห้าม Bypass ฟังก์ชันความปลอดภัยที่จำเป็นหรือได้รับการรับรอง
+
+## รายการทดสอบ Validation
+
+ควรทดสอบกรณีผิดปกติอย่างน้อยดังนี้:
+
+- Sensor ค้าง ON หรือค้าง OFF
+- สายสัญญาณขาด
+- Field Power หาย
+- Output ลัดวงจร
+- Drive Fault
+- Watchdog ขาดการทำงาน
+- Spindle ไม่หยุดตามคำสั่ง
+- M19 Timeout
+- Magazine หมุนเลยตำแหน่ง
+- Tool ไม่ถูกจับ
+- Drawbar มีสถานะไม่ตรงกัน
+- ไฟดับในแต่ละช่วงสำคัญของลำดับ ATC

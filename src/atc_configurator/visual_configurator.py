@@ -337,7 +337,7 @@ class VisualAtcConfiguratorWidget(QWidget):
         root.setSpacing(4)
 
         heading = QHBoxLayout()
-        title = QLabel("Universal ATC — Visual Configuration")
+        title = QLabel("Universal ATC — ตั้งค่าด้วยภาพ")
         title.setStyleSheet("font-size: 17px; font-weight: 700; color: #263746;")
         self.status_chip = QLabel("พร้อมตั้งค่า")
         self.status_chip.setAlignment(Qt.AlignCenter)
@@ -346,12 +346,12 @@ class VisualAtcConfiguratorWidget(QWidget):
         heading.addWidget(self.status_chip)
         root.addLayout(heading)
 
-        hint = QLabel("เลือกชนิด ATC แล้วคลิกจุดสีบนภาพเพื่อกำหนด Sensor และ Output — สีเขียว = Map แล้ว, สีแดง = ยังขาด")
+        hint = QLabel("เลือกชนิด ATC แล้วคลิกจุดบนภาพเพื่อกำหนด Sensor และ Output — สีเขียว = กำหนดแล้ว, สีแดง = ยังขาด")
         hint.setWordWrap(True)
         hint.setStyleSheet("color:#52616d;")
         root.addWidget(hint)
 
-        settings = QGroupBox("1. เลือกรูปแบบเครื่อง")
+        settings = QGroupBox("1. เลือกรูปแบบเครื่องจักร")
         settings.setMaximumHeight(108)
         settings_layout = QHBoxLayout(settings)
         self.manifest_combo = QComboBox()
@@ -387,21 +387,21 @@ class VisualAtcConfiguratorWidget(QWidget):
         self.diagram.signalSelected.connect(self._select_signal)
         diagram_layout.addWidget(self.diagram, 1)
         sim_controls = QHBoxLayout()
-        self.sim_status = QLabel("SIM: พร้อม — Tool 1")
+        self.sim_status = QLabel("การจำลอง: พร้อม — Tool 1")
         self.sim_status.setStyleSheet("background:#e7eef4;border-radius:5px;padding:5px;font-weight:600;")
         self.sim_tool = QSpinBox()
         self.sim_tool.setRange(1, 12)
         self.sim_tool.setValue(2)
         self.sim_home_button = QPushButton("Home จาน")
-        self.sim_home_button.setText("Reset SIM")
-        self.monitor_button = QPushButton("ATC Monitor / I/O")
+        self.sim_home_button.setText("รีเซ็ตการจำลอง")
+        self.monitor_button = QPushButton("มอนิเตอร์ ATC / I/O")
         self.monitor_button.clicked.connect(self._open_monitor)
         self.sim_run_button = QPushButton("เปลี่ยนทูล")
         self.sim_stop_button = QPushButton("หยุด SIM")
         self.sim_run_button.setStyleSheet("background:#2374ab;color:white;font-weight:700;")
         self.sim_stop_button.setStyleSheet("background:#a33b3b;color:white;")
         sim_controls.addWidget(self.sim_status, 1)
-        sim_controls.addWidget(QLabel("Tool เป้าหมาย:"))
+        sim_controls.addWidget(QLabel("หมายเลข Tool เป้าหมาย:"))
         sim_controls.addWidget(self.sim_tool)
         sim_controls.addWidget(self.sim_home_button)
         sim_controls.addWidget(self.sim_run_button)
@@ -434,11 +434,11 @@ class VisualAtcConfiguratorWidget(QWidget):
         assign_form = QFormLayout()
         self.resource_combo = QComboBox()
         self.usage_combo = QComboBox()
-        self.usage_combo.addItem("ใช้และตรวจสอบ Sensor", True)
-        self.usage_combo.addItem("ไม่ใช้ — ข้ามการตรวจ", False)
+        self.usage_combo.addItem("ใช้และตรวจสอบเซ็นเซอร์", True)
+        self.usage_combo.addItem("ไม่ใช้ — ข้ามการตรวจสอบ", False)
         self.active_combo = QComboBox()
-        self.active_combo.addItem("High — ON เมื่อมีไฟ", "high")
-        self.active_combo.addItem("Low — ON เมื่อลงกราวด์", "low")
+        self.active_combo.addItem("Active High — ON เมื่อมีไฟ", "high")
+        self.active_combo.addItem("Active Low — ON เมื่อลงกราวด์", "low")
         assign_form.addRow("การใช้งาน:", self.usage_combo)
         assign_form.addRow("ขา I/O:", self.resource_combo)
         assign_form.addRow("Active Level:", self.active_combo)
@@ -452,10 +452,10 @@ class VisualAtcConfiguratorWidget(QWidget):
         self.summary = QLabel()
         self.summary.setWordWrap(True)
         actions.addWidget(self.summary, 1)
-        self.auto_button = QPushButton("Auto-map I/O")
+        self.auto_button = QPushButton("จัดสรร I/O อัตโนมัติ")
         self.validate_button = QPushButton("ตรวจสอบ")
-        self.save_button = QPushButton("บันทึก Draft")
-        self.apply_button = QPushButton("Apply Configuration")
+        self.save_button = QPushButton("บันทึกฉบับร่าง")
+        self.apply_button = QPushButton("สร้าง Configuration สำหรับทดสอบ")
         self.apply_button.setStyleSheet("background:#2e8b57;color:white;font-weight:700;min-height:34px;")
         self.auto_button.clicked.connect(self._auto_map)
         self.validate_button.clicked.connect(self._validate)
@@ -723,7 +723,7 @@ class VisualAtcConfiguratorWidget(QWidget):
         self._last_report = report
         summary = report["summary"]
         if report["configuration_valid"]:
-            self.status_chip.setText("Configuration ผ่านการตรวจสอบ")
+            self.status_chip.setText("Configuration ผ่านการตรวจสอบแล้ว")
             self.status_chip.setStyleSheet("background:#d9f3e3;color:#17633b;border-radius:10px;padding:5px 12px;")
         else:
             self.status_chip.setText("ยังมีรายการที่ต้องแก้")
@@ -741,7 +741,7 @@ class VisualAtcConfiguratorWidget(QWidget):
             if report["configuration_valid"]:
                 QMessageBox.information(self, "ผลการตรวจสอบ", message)
             else:
-                QMessageBox.warning(self, "Configuration ยังไม่พร้อม", message)
+                QMessageBox.warning(self, "Configuration ยังไม่พร้อมใช้งาน", message)
         return report
 
     def _save(self) -> None:
@@ -754,7 +754,7 @@ class VisualAtcConfiguratorWidget(QWidget):
     def _apply(self) -> None:
         report = self._validate(show_dialog=False)
         if not report["configuration_valid"]:
-            QMessageBox.warning(self, "Apply ไม่สำเร็จ", "Configuration ยังมี Error กรุณาดูผลจากปุ่ม ตรวจสอบ")
+            QMessageBox.warning(self, "สร้างคอนฟิกทดสอบไม่สำเร็จ", "Configuration ยังมีข้อผิดพลาด กรุณาดูผลจากปุ่มตรวจสอบ")
             return
         if not (self.base_config_dir / "axis.ini").is_file():
             QMessageBox.warning(self, "ไม่พบ axis.ini", f"ไม่พบ axis.ini ใน\n{self.base_config_dir}")
@@ -771,7 +771,7 @@ class VisualAtcConfiguratorWidget(QWidget):
         except Exception as exc:
             QMessageBox.critical(self, "สร้าง Configuration ไม่สำเร็จ", str(exc))
             return
-        self.status_chip.setText("Apply สำเร็จ — Candidate พร้อมทดสอบ")
+        self.status_chip.setText("สร้าง Candidate สำเร็จ — พร้อมทดสอบ")
         QMessageBox.information(
             self,
             "สร้าง Configuration สำเร็จ",
@@ -791,7 +791,7 @@ def main(argv: list[str] | None = None) -> int:
     config = WizardModel.load_config(args.config) if args.config else None
     app = QApplication(sys.argv[:1])
     window = QMainWindow()
-    window.setWindowTitle("LinuxCNC Universal ATC — Visual Configuration")
+    window.setWindowTitle("LinuxCNC Universal ATC — ตั้งค่าด้วยภาพ")
     window.setCentralWidget(
         VisualAtcConfiguratorWidget(
             data_dir=data_dir,

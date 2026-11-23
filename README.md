@@ -1,56 +1,103 @@
 # LinuxCNC Universal ATC — Demo
 
-A public, curated demonstration of the LinuxCNC Universal ATC configurator and VMC850 simulation.
+**โครงการสาธิตระบบตั้งค่า Automatic Tool Changer (ATC) สำหรับ LinuxCNC**
 
-This repository contains selected source files and examples only. It is intentionally separate from the development repository: no private Git history, branches, pull requests, hardware-design documents, or board pin maps are copied here.
+สถานะโครงการ: **Public Demo — ทดลองด้วย Simulation เท่านั้น**  
+รูปแบบ: **GUI Configurator + VMC850 Vismach Simulation**  
+Repository นี้เป็นชุดสาธิตที่คัดแยกจากโครงการพัฒนาหลัก เพื่อให้ทดลองและตรวจสอบได้โดยไม่เปิดเผยเอกสาร Hardware ภายใน
 
-## What is included
+> **ข้อควรทราบ:** นี่คือซอฟต์แวร์สาธิต ไม่ใช่ระบบควบคุม ATC สำหรับเครื่อง CNC จริง ห้ามต่อเข้ากับ Servo Drive, VFD, Solenoid Valve หรืออุปกรณ์ขับเคลื่อนจริง
 
-- Eight-page ATC configuration wizard (Qt / PyQt5)
-- ATC profiles, configuration schemas, validation and deterministic I/O auto-mapping
-- Simulated hardware manifest and example configurations
-- Isolated LinuxCNC candidate generation
-- QtVCP panel integration
-- VMC850-style 12-pocket carousel Vismach model
-- Simulation monitor, simulated tool-change sequence and M19 orientation demonstration
-- Automated tests and GitHub Actions test workflow
+## เป้าหมายของ Demo
 
-## Important limitations
+แสดงแนวทางการตั้งค่า ATC แบบ Universal ผ่าน GUI โดยไม่ต้องให้ผู้ใช้เขียน HAL/INI เอง และทดลองลำดับการเปลี่ยนทูลผ่าน Simulation
 
-**This is a software demonstration, not a production ATC controller.**
+ความสามารถที่รวมอยู่ในรุ่นนี้:
 
-- The included hardware manifest is simulated only. It does not describe a physical Mesa board or verified wiring.
-- ATC Enable remains disabled and Live Apply is not implemented.
-- Candidate generation copies a LinuxCNC simulation configuration and writes metadata. The generated HAL is intentionally inert except for loading the optional Vismach simulation display.
-- The simulated tool-change and spindle-orientation sequences do not execute real LinuxCNC M6/M19 machine commands.
-- The VMC850 model is schematic, not a dimensionally verified machine model.
-- No safety interlock, collision avoidance, machine certification, or real hardware operation is provided.
-- Do not connect this demo to servo drives, VFDs, pneumatic valves, tool changers, or other physical actuators.
+- Setup Wizard จำนวน 8 ขั้นตอน สำหรับเลือก Hardware, ATC Type, Magazine, Transfer, Feedback, M19 และ I/O
+- Visual Configurator สำหรับคลิกตำแหน่ง Sensor/Output บนภาพเพื่อกำหนด I/O
+- ATC Profile และ Configuration Schema แบบ JSON
+- ตรวจสอบ Configuration และจัดสรร I/O อัตโนมัติ (Auto-map)
+- สร้าง LinuxCNC Simulation Candidate แยกจากคอนฟิกต้นฉบับ
+- QtVCP Panel และ ATC Monitor สำหรับดูสถานะ Input/Output และลำดับการทำงาน
+- VMC850 Vismach Simulation พร้อม Magazine แบบ Carousel 12 Pocket
+- จำลอง Spindle Orientation (M19), Drawbar, ประตู ATC และ Feedback ของ Sensor
+- Automated Tests และ GitHub Actions
 
-Read [VMC850 Simulation](docs/VMC850-SIMULATION.md) and [Interlock / Recovery Notes](safety/01-INTERLOCK-RECOVERY.md) before experimenting.
+## ภาพรวมรูปแบบ ATC
 
-## Requirements
+![ภาพจำแนกรูปแบบ Magazine และกลไก ATC](docs/images/atc-mechanism-types.svg)
 
-For the GUI and Vismach demonstration:
+ภาพนี้แสดงตัวอย่างโครงสร้าง Magazine และกลไกส่งทูลหลายรูปแบบ เพื่อให้เห็นว่า Magazine กับ Transfer Mechanism เป็นคนละส่วนของ Configuration
 
-- Linux with a working desktop session (X11/Qt display)
-- LinuxCNC 2.9 simulation installation
-- Python 3.9 or newer
-- PyQt5, LinuxCNC Python/HAL modules, Vismach and PyOpenGL
-- `jsonschema` and `pytest` for configuration validation and tests
+## ภาพรวมวิธีตรวจสอบตำแหน่ง Magazine
 
-The exact system packages vary by LinuxCNC distribution. On Debian/Ubuntu-based LinuxCNC systems, install the matching system packages for PyQt5, Python JSON Schema, PyOpenGL and pytest. Keep the system Python environment visible to the virtual environment.
+![ภาพตัวอย่างวิธีตรวจสอบตำแหน่ง Magazine](docs/images/magazine-position-feedback.svg)
 
-## Quick start
+ระบบสามารถกำหนดวิธี Feedback ได้หลายแบบ เช่น Home/Index, Sensor ต่อ Pocket, Gray Code, Binary/BCD และ Encoder ทั้งนี้ต้องเลือกตามวงจรและกลไกของเครื่องจริง
 
-Clone this repository:
+## ภาพประกอบ VMC850 Simulation
+
+![แผนภาพองค์ประกอบ VMC850 และ ATC 12 Pocket](docs/images/vmc850-atc-overview.svg)
+
+แผนภาพนี้เป็นภาพประกอบเชิงแนวคิดจากองค์ประกอบใน Vismach Model ไม่ใช่ภาพหน้าจอ Render จริง ไม่ใช่แบบเครื่องผลิต และไม่ได้ยืนยันขนาดหรือระยะทางกลของ VMC850
+
+## ภาพรวมการทำงาน
+
+1. เลือก Hardware Capability Manifest ที่ใช้ในการจำลอง
+2. เลือก ATC Profile และกำหนดรูปแบบ Magazine / Transfer
+3. กำหนด Position Feedback และการจัดแนว Spindle (M19)
+4. กำหนด Logical Signal ให้กับ Resource I/O
+5. กด Validate เพื่อตรวจสอบ Configuration
+6. สร้าง Candidate แยกสำหรับ LinuxCNC Simulation
+7. เปิด QtDragon และทดลองดู Vismach / ATC Monitor
+
+**ข้อจำกัดสำคัญ:** ATC Enable ยังปิดอยู่ และยังไม่มี Live Apply การกด Apply ใน Demo จะสร้างไฟล์ Candidate สำหรับทดสอบเท่านั้น ไม่ได้สั่ง M6/M19 จริง ไม่ได้ขับ Output จริง และไม่ได้ควบคุมการเคลื่อนที่ของเครื่องจริง
+
+## เอกสารโครงการ
+
+### ภาพรวมและกลไก ATC
+- [ภาพรวมระบบ Universal ATC](docs/01-SYSTEM-OVERVIEW.md)
+- [รูปแบบ ATC ที่รองรับ](docs/02-ATC-MECHANISMS.md)
+- [วิธีตรวจสอบตำแหน่ง Magazine](docs/03-MAGAZINE-POSITIONING.md)
+- [การจัดการ Tool และ Pocket](docs/04-TOOL-MANAGEMENT.md)
+- [Spindle Orientation และ M19](docs/05-SPINDLE-ORIENTATION-M19.md)
+- [ตำแหน่ง Z สำหรับ ATC — แนวทางที่วางแผนไว้](docs/Z-ATC-POSITIONS.md)
+
+### Software และ Configurator
+- [สถาปัตยกรรม Software](software/01-SOFTWARE-ARCHITECTURE.md)
+- [ATC State Machine](software/02-ATC-STATE-MACHINE.md)
+- [QtVCP ATC Configurator](software/03-QTVCP-CONFIGURATOR.md)
+- [รูปแบบไฟล์ Configuration](software/04-CONFIGURATION-FORMAT.md)
+- [ลำดับหน้าจอ GUI Configuration Wizard V1](software/05-GUI-CONFIGURATION-FLOW-V1.md)
+- [Configuration Engine V1 — ขอบเขตและวิธีใช้งาน](docs/CONFIGURATION-ENGINE-V1.md)
+- [รายการ ATC Profiles](profiles/README.md)
+
+### Simulation และ Safety
+- [VMC850 Simulation — QtDragon, Vismach และ ATC Monitor](docs/VMC850-SIMULATION.md)
+- [Interlock, Fault และ Recovery](safety/01-INTERLOCK-RECOVERY.md)
+- [ขอบเขตการเผยแพร่ Public Demo](docs/PUBLIC-DEMO-SCOPE.md)
+
+## วิธีติดตั้งและทดลอง
+
+### 1. ข้อกำหนด
+
+- Linux ที่มี Desktop/X11 หรือใช้งานผ่าน VNC ได้
+- LinuxCNC 2.9 รุ่น Simulation
+- Python 3.9 หรือใหม่กว่า
+- PyQt5, LinuxCNC Python/HAL modules, Vismach และ PyOpenGL
+- `jsonschema` และ `pytest` สำหรับตรวจ Configuration และทดสอบ
+
+ชื่อแพ็กเกจระบบอาจแตกต่างกันตาม LinuxCNC Distribution ควรใช้แพ็กเกจที่ตรงกับ Python ของระบบ LinuxCNC และสร้าง Virtual Environment โดยเปิด `--system-site-packages` เพื่อให้มองเห็นโมดูล LinuxCNC
+
+### 2. Clone Repository
 
 ```bash
 git clone https://github.com/TC227/linuxcnc-universal-atc-demo.git
 cd linuxcnc-universal-atc-demo
 ```
 
-Create an environment that can see LinuxCNC's system Python modules and install the project:
+### 3. สร้าง Python Environment
 
 ```bash
 python3 -m venv --system-site-packages .venv
@@ -58,42 +105,31 @@ python3 -m venv --system-site-packages .venv
 python -m pip install -e ".[test]"
 ```
 
-If PyQt5 is not already available from the system Python, install the GUI extra as well:
+หาก PyQt5 ยังไม่มีใน Python ของระบบ ให้ติดตั้ง GUI extra เพิ่ม:
 
 ```bash
 python -m pip install -e ".[test,gui]"
 ```
 
-Build an isolated VMC850 QtDragon simulation candidate:
+### 4. สร้าง VMC850 Simulation Candidate
 
 ```bash
 python scripts/build_vmc850_sim.py
 ```
 
-The script prints the generated configuration directory. Launch the reported `axis.ini` with LinuxCNC, for example:
+สคริปต์จะแจ้งตำแหน่งโฟลเดอร์ Candidate ที่สร้างขึ้น โดยใช้สำเนา LinuxCNC Simulation Configuration แยกต่างหาก ไม่เขียนทับคอนฟิกต้นฉบับ
+
+เปิดไฟล์ `axis.ini` จาก path ที่สคริปต์รายงาน ตัวอย่าง:
 
 ```bash
 linuxcnc ~/linuxcnc/configs/universal-atc-generated/vmc850-12-tool-sim-r001/axis.ini
 ```
 
-If the installed QtDragon metric sample is in a different location, pass `--sample-dir`. To use an existing isolated simulation folder, pass `--base-config-dir` (it must contain `axis.ini`).
+หาก QtDragon Metric Sample อยู่คนละตำแหน่ง ให้ระบุ `--sample-dir` หรือใช้ `--base-config-dir` กับโฟลเดอร์ Simulation ที่แยกไว้และมี `axis.ini`
 
-## Run tests
+**การเปิด GUI/Vismach ต้องมี Linux Desktop หรือ DISPLAY ที่ใช้งานได้** ส่วน `QT_QPA_PLATFORM=offscreen` ใช้สำหรับ Automated Test เท่านั้น
 
-```bash
-python -m pip install -e ".[test,gui]"
-QT_QPA_PLATFORM=offscreen python -m pytest -q
-```
-
-Or use the helper script:
-
-```bash
-bash scripts/test_ubuntu_local.sh
-```
-
-The automated GUI test uses Qt's offscreen platform; it does not launch LinuxCNC or access physical hardware.
-
-## Validate an example configuration
+### 5. ทดลอง Setup Wizard และตรวจ Configuration
 
 ```bash
 atc-config validate \
@@ -101,24 +137,55 @@ atc-config validate \
   --manifest examples/hardware-manifests/simulator-24di-16do.json
 ```
 
-The example starts with an empty I/O mapping, so validation will report unmapped required signals until the wizard's Auto-map operation is used or a mapping is supplied.
+ตัวอย่าง Configuration เริ่มต้นยังไม่มี I/O Mapping จึงอาจแจ้ง Required Signal ที่ยังไม่ได้กำหนด ให้ใช้ Auto-map ใน Wizard หรือกำหนด Mapping ก่อนตรวจซ้ำ
 
-## Repository layout
+### 6. รันทดสอบ
 
-| Path | Purpose |
+```bash
+python -m pip install -e ".[test,gui]"
+QT_QPA_PLATFORM=offscreen python -m pytest -q
+```
+
+หรือใช้สคริปต์:
+
+```bash
+bash scripts/test_ubuntu_local.sh
+```
+
+การทดสอบ GUI แบบ Offscreen ไม่ได้เปิด LinuxCNC จริงและไม่เข้าถึง Hardware
+
+## โครงสร้าง Repository
+
+| โฟลเดอร์ | หน้าที่ |
 |---|---|
-| `src/atc_configurator/` | Wizard, validator, I/O mapper, candidate generator and simulation runtime |
-| `qtvcp/` | QtVCP panel integration |
-| `scripts/` | VMC850 simulation builder and LinuxCNC test helpers |
-| `examples/` | Example ATC configurations and simulated I/O resources |
-| `profiles/` | Generic ATC profile catalogue |
-| `schemas/` | JSON configuration, manifest and validation schemas |
-| `docs/` | System, mechanism, configuration and simulation documentation |
-| `software/` | Software architecture and GUI design notes |
-| `tests/` | Automated unit and GUI smoke tests |
+| `src/atc_configurator/` | Wizard, Validator, I/O Mapper, Candidate Generator และ Simulation Runtime |
+| `qtvcp/` | QtVCP Panel Integration |
+| `scripts/` | สคริปต์สร้าง VMC850 Simulation และเครื่องมือทดสอบ |
+| `examples/` | ตัวอย่าง ATC Configuration และ Hardware Manifest สำหรับ Simulation |
+| `profiles/` | รายการ ATC Profile |
+| `schemas/` | JSON Schema สำหรับ Configuration, Manifest และ Validation |
+| `docs/` | เอกสารระบบ กลไก ATC และ Simulation |
+| `software/` | สถาปัตยกรรม Software และ GUI Workflow |
+| `safety/` | ข้อกำหนด Interlock, Fault และ Recovery |
+| `tests/` | Unit Test และ GUI Smoke Test |
 
-## Scope and licensing
+## ขอบเขตและข้อจำกัดทางวิศวกรรม
 
-This is a curated public source snapshot. See [Public Demo Scope](docs/PUBLIC-DEMO-SCOPE.md) for the publication boundary.
+- Hardware Manifest ที่รวมอยู่เป็น **Simulation Manifest** เท่านั้น ไม่ใช่ข้อมูลวงจรหรือ Pinout ของ Mesa Board จริง
+- ATC Enable ถูกปิด และยังไม่ Implement Live Apply
+- Candidate Generator สร้างสำเนา LinuxCNC Simulation Configuration และ Metadata
+- HAL ที่สร้างขึ้นไม่มีการสั่ง Physical Output หรือ Motion ของเครื่องจริง
+- ลำดับ Tool Change และ M19 ใน Runtime เป็นการจำลอง ไม่ได้ส่งคำสั่ง M6/M19 จริงจาก Interpreter
+- VMC850 Vismach เป็นโมเดลเชิงสาธิต ไม่ใช่โมเดลเครื่องที่ยืนยันมิติจริง
+- ยังไม่มี Collision Detection, Safety Certification หรือการรับรองการทำงานกับเครื่องจริง
+- ห้ามใช้ Demo นี้ควบคุม Servo, VFD, Solenoid, Pneumatic Valve, Tool Changer หรืออุปกรณ์จริง
 
-**No open-source license is included at this time.** Public visibility on GitHub does not by itself grant permission to copy, modify, redistribute, or use the code. A license can be added when the repository owner chooses one.
+ก่อนทดลอง โปรดอ่าน [VMC850 Simulation](docs/VMC850-SIMULATION.md) และ [Interlock / Recovery](safety/01-INTERLOCK-RECOVERY.md)
+
+## ความสัมพันธ์กับโครงการหลัก
+
+Repository นี้เป็น Public Demo ที่คัดเลือกเฉพาะไฟล์สำหรับสาธิต แยกจาก Repository พัฒนาหลักซึ่งยังคงเป็น Private โดยไม่มี Git History, Branch ภายใน, PCB Schematic, Board Layout, Pin Map หรือ Hardware Resource Document ภายในติดมาด้วย
+
+## License
+
+ขณะนี้ยังไม่ได้เพิ่มไฟล์ License ให้ Repository นี้ การมองเห็น Source Code แบบ Public บน GitHub **ไม่ได้หมายความว่าได้รับสิทธิ์นำไปใช้ แก้ไข หรือแจกจ่ายต่อโดยอัตโนมัติ** โปรดรอการกำหนด License จากเจ้าของโครงการก่อนนำโค้ดไปใช้ต่อ

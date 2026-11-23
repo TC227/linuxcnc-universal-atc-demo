@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">แผนภาพองค์ประกอบ VMC850 และ ATC 12 Pocket</title>
+  <desc id="desc">ภาพประกอบเชิงแนวคิดแสดงเครื่องกัดแนวตั้ง โต๊ะ X/Y หัว Z สปินเดิล และแมกกาซีนแบบ Carousel 12 ช่อง</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7fafc"/>
+      <stop offset="1" stop-color="#e8eef4"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#dfe6ec"/>
+      <stop offset="1" stop-color="#9eabb7"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4b91b6"/>
+      <stop offset="1" stop-color="#245a7a"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#263746" flood-opacity=".18"/>
+    </filter>
+    <style>
+      .th { font-family: "Noto Sans Thai", Tahoma, sans-serif; fill: #203344; }
+      .en { font-family: Arial, sans-serif; fill: #203344; }
+      .label { font-size: 22px; font-weight: 700; }
+      .small { font-size: 17px; }
+      .call { fill: none; stroke: #496b83; stroke-width: 2.5; stroke-dasharray: 7 6; }
+      .machine { stroke: #52616d; stroke-width: 3; stroke-linejoin: round; }
+    </style>
+  </defs>
+  <rect width="1280" height="720" rx="22" fill="url(#bg)"/>
+  <text x="54" y="62" class="th" font-size="34" font-weight="700">VMC850 — ภาพรวมระบบจำลอง ATC 12 Pocket</text>
+  <text x="56" y="96" class="en" font-size="18" fill="#587184">LinuxCNC • QtDragon • Vismach • Universal ATC Demo</text>
+
+  <!-- Machine base and column -->
+  <g filter="url(#shadow)">
+    <path d="M350 574 H1118 L1080 636 H330 Z" fill="#64717c" class="machine"/>
+    <rect x="876" y="145" width="168" height="438" rx="10" fill="url(#metal)" class="machine"/>
+    <rect x="904" y="172" width="112" height="370" rx="5" fill="#c4ced7" stroke="#64717c" stroke-width="2"/>
+    <rect x="790" y="218" width="300" height="152" rx="12" fill="url(#metal)" class="machine"/>
+    <rect x="820" y="243" width="240" height="96" rx="8" fill="#eef2f5" stroke="#7d8994" stroke-width="2"/>
+    <rect x="932" y="339" width="42" height="110" rx="8" fill="#53616d" class="machine"/>
+    <path d="M940 449 L966 449 L959 505 L947 505 Z" fill="#c1a35e" stroke="#6e5c35" stroke-width="2"/>
+    <rect x="932" y="501" width="42" height="16" rx="4" fill="#d6dce1" stroke="#53616d" stroke-width="2"/>
+    <rect x="540" y="520" width="340" height="34" rx="6" fill="#8796a2" class="machine"/>
+    <rect x="582" y="480" width="258" height="42" rx="5" fill="#c2cbd3" class="machine"/>
+    <rect x="610" y="462" width="202" height="18" rx="4" fill="#53616d"/>
+    <rect x="690" y="430" width="48" height="32" rx="4" fill="#c1a35e" stroke="#6e5c35" stroke-width="2"/>
+    <rect x="520" y="554" width="382" height="20" rx="4" fill="#4e5d69"/>
+  </g>
+
+  <!-- ATC magazine slide and carousel -->
+  <g filter="url(#shadow)">
+    <rect x="168" y="420" width="460" height="28" rx="8" fill="#697985" stroke="#42515c" stroke-width="3"/>
+    <rect x="185" y="394" width="430" height="20" rx="6" fill="#b7c2ca" stroke="#667682" stroke-width="2"/>
+    <path d="M205 372 L580 372 L602 394 L184 394 Z" fill="#d7dfe5" stroke="#667682" stroke-width="2"/>
+    <circle cx="390" cy="275" r="137" fill="#39789d" stroke="#254c66" stroke-width="5"/>
+    <circle cx="390" cy="275" r="47" fill="#9aabb7" stroke="#53616d" stroke-width="4"/>
+    <circle cx="390" cy="275" r="16" fill="#435563"/>
+    <g fill="#e2b95d" stroke="#6e5c35" stroke-width="2">
+      <g id="pocket">
+        <rect x="379" y="119" width="22" height="54" rx="6"/>
+        <path d="M382 119 L398 119 L394 98 L386 98 Z"/>
+      </g>
+      <use href="#pocket" transform="rotate(30 390 275)"/>
+      <use href="#pocket" transform="rotate(60 390 275)"/>
+      <use href="#pocket" transform="rotate(90 390 275)"/>
+      <use href="#pocket" transform="rotate(120 390 275)"/>
+      <use href="#pocket" transform="rotate(150 390 275)"/>
+      <use href="#pocket" transform="rotate(180 390 275)"/>
+      <use href="#pocket" transform="rotate(210 390 275)"/>
+      <use href="#pocket" transform="rotate(240 390 275)"/>
+      <use href="#pocket" transform="rotate(270 390 275)"/>
+      <use href="#pocket" transform="rotate(300 390 275)"/>
+      <use href="#pocket" transform="rotate(330 390 275)"/>
+    </g>
+    <path d="M520 315 Q590 350 605 407" fill="none" stroke="#d95c4f" stroke-width="8" stroke-linecap="round"/>
+    <rect x="553" y="390" width="70" height="28" rx="6" fill="#d95c4f" stroke="#8f3b34" stroke-width="2"/>
+  </g>
+
+  <!-- Door and pneumatics -->
+  <g>
+    <rect x="708" y="282" width="38" height="210" rx="5" fill="#65a8b9" fill-opacity=".65" stroke="#397c8c" stroke-width="3"/>
+    <rect x="716" y="300" width="22" height="174" rx="3" fill="#e8f4f7" fill-opacity=".55"/>
+    <rect x="640" y="356" width="68" height="18" rx="5" fill="#9caab4" stroke="#53616d" stroke-width="2"/>
+    <rect x="626" y="350" width="18" height="30" rx="4" fill="#687986"/>
+  </g>
+
+  <!-- Callouts -->
+  <g>
+    <path d="M390 130 L300 145 L210 145" class="call"/>
+    <circle cx="390" cy="130" r="5" fill="#d95c4f"/>
+    <text x="60" y="137" class="th label">จาน Magazine 12 ช่อง</text>
+    <text x="60" y="165" class="en small">Umbrella / Carousel</text>
+
+    <path d="M570 420 L570 470 L430 470" class="call"/>
+    <circle cx="570" cy="420" r="5" fill="#d95c4f"/>
+    <text x="260" y="505" class="th label">ชุดเลื่อน Magazine</text>
+    <text x="260" y="531" class="en small">Magazine Extend / Retract</text>
+
+    <path d="M728 286 L728 180 L620 180" class="call"/>
+    <circle cx="728" cy="286" r="5" fill="#d95c4f"/>
+    <text x="480" y="170" class="th label">ประตู ATC และชุดลม</text>
+
+    <path d="M953 450 L1100 450 L1150 420" class="call"/>
+    <circle cx="953" cy="450" r="5" fill="#d95c4f"/>
+    <text x="1060" y="390" class="th label">Spindle + Tool</text>
+    <text x="1060" y="418" class="en small">Drawbar / M19</text>
+
+    <path d="M710 520 L1040 610 L1160 610" class="call"/>
+    <circle cx="710" cy="520" r="5" fill="#d95c4f"/>
+    <text x="1010" y="652" class="th label">โต๊ะ X / Y</text>
+  </g>
+
+  <rect x="48" y="664" width="1184" height="34" rx="8" fill="#dce6ed"/>
+  <text x="66" y="687" class="th small">ภาพประกอบเชิงแนวคิดจาก Vismach Model ใน Repository — ไม่ใช่ภาพหน้าจอ Render จริง และไม่ใช่แบบมิติสำหรับผลิตเครื่อง</text>
+</svg>

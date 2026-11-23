@@ -1,4 +1,4 @@
-# Z positions and cam-operated drawbar: planned work
+# ตำแหน่ง Z และ Drawbar แบบลูกเบี้ยว — แนวทางที่วางแผนไว้
 
 สถานะ: **ข้อเสนอจากการสนทนา ยังไม่ implement** — 17 พฤศจิกายน 2026
 

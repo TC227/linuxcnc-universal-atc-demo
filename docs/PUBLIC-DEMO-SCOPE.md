@@ -1,41 +1,43 @@
-# Public Demo Scope
+# ขอบเขตการเผยแพร่ Public Demo
 
-## Purpose
+## วัตถุประสงค์
 
-This repository is a clean, public demonstration snapshot of the LinuxCNC Universal ATC configurator and its VMC850 simulation. It is intended for review, education, GUI experimentation and software testing.
+Repository นี้เป็นชุดตัวอย่างสาธารณะของ LinuxCNC Universal ATC Configurator และ VMC850 Simulation จัดทำขึ้นเพื่อให้ตรวจสอบแนวคิด ทดลอง GUI เรียนรู้ และทดสอบซอฟต์แวร์ โดยแยกออกจาก Repository พัฒนาหลัก
 
-## Source snapshot
+## ที่มาของ Source Snapshot
 
-- Development source: `linuxcnc-universal-atc`
-- Source branch: `feature/vmc850-atc-simulation`
-- Source commit: `13ea6540dc76942694cbad45f58e74392a62954e`
-- Export date: 2026-11-23
+- Repository ต้นทาง: `linuxcnc-universal-atc`
+- Branch ต้นทาง: `feature/vmc850-atc-simulation`
+- Commit ต้นทาง: `13ea6540dc76942694cbad45f58e74392a62954e`
+- วันที่ส่งออก: 23 พฤศจิกายน 2026
 
-Only selected text/source assets were copied. The new repository has its own independent Git history.
+คัดลอกเฉพาะไฟล์ Source และเอกสารที่จำเป็นสำหรับ Demo โดย Repository นี้มี Git History แยกเป็นของตนเอง
 
-## Included
+## ไฟล์และเนื้อหาที่รวมไว้
 
-- Python configurator, validation engine, simulation runtime and tests
-- QtVCP panel integration
-- Generic ATC profiles and JSON schemas
-- Simulation-only hardware manifest and sample configurations
-- VMC850 schematic Vismach model and setup instructions
-- General ATC mechanism and software design documentation
+- Python Configurator, Validation Engine, Simulation Runtime และ Tests
+- QtVCP Panel Integration
+- ATC Profile ทั่วไปและ JSON Schema
+- Hardware Manifest สำหรับ Simulation และตัวอย่าง Configuration
+- VMC850 Vismach Model แบบ Schematic พร้อมคำแนะนำการติดตั้ง
+- เอกสารอธิบายกลไก ATC และสถาปัตยกรรม Software
 
-## Deliberately excluded
+## สิ่งที่ไม่นำมาเผยแพร่
 
-- Git commit history, development branches, pull requests and internal issue discussions
-- PCB schematics, board layouts, component lists, pin maps and hardware resource-budget documents
-- The unverified 7i92/7i76 clone hardware manifest
-- Private machine-specific configuration, network addresses, credentials and personal paths
-- Internal roadmap and unrelated project notes
+- Git Commit History, Branch สำหรับพัฒนา, Pull Request และการสนทนาใน Issue ภายใน
+- PCB Schematic, Board Layout, รายการอุปกรณ์, Pin Map และเอกสารจัดสรรทรัพยากร Hardware
+- Hardware Manifest ของบอร์ด Clone 7i92/7i76 ที่ยังไม่ได้ยืนยัน
+- Machine Configuration เฉพาะเครื่อง, Network Address, Credential และ Personal Path
+- Roadmap ภายในและบันทึกโครงการอื่นที่ไม่เกี่ยวข้อง
 
-## Safety boundary
+## ขอบเขตด้านความปลอดภัย
 
-The simulator manifest is explicitly marked `simulated`. It must not be interpreted as a verified hardware definition. ATC Enable and Live Apply remain disabled. Candidate generation is intended for isolated LinuxCNC simulation configurations only.
+Hardware Manifest ที่รวมไว้ระบุสถานะเป็น `simulated` อย่างชัดเจน ห้ามนำไปตีความว่าเป็น Hardware Definition ที่ผ่านการตรวจสอบแล้ว
 
-This demo is not suitable for direct machine operation or safety-critical use.
+ATC Enable และ Live Apply ยังคงปิดอยู่ การสร้าง Candidate มีไว้สำหรับ LinuxCNC Simulation ที่แยกจาก Machine Configuration จริงเท่านั้น
 
-## Licensing
+Demo นี้ไม่เหมาะสำหรับควบคุมเครื่องจักรจริงหรือใช้ในงานที่มีความเสี่ยงด้านความปลอดภัย
 
-No license has been selected or added. Until the repository owner adds a license, do not assume that public access grants reuse rights.
+## License
+
+ขณะนี้ยังไม่ได้เลือกหรือเพิ่ม License ให้ Repository นี้ การเปิด Repository เป็น Public ไม่ได้ให้สิทธิ์ในการนำ Source Code ไปใช้ แก้ไข หรือแจกจ่ายต่อโดยอัตโนมัติ

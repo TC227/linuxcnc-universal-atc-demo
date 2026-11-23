@@ -10,7 +10,7 @@ class SimMonitor(QDialog):
     def __init__(self, panel):
         super().__init__(panel)
         self.panel = panel
-        self.setWindowTitle("ATC Monitor — Simulation I/O")
+        self.setWindowTitle("ATC Monitor — สถานะ I/O จำลอง")
         self.resize(1000, 650)
         root = QVBoxLayout(self)
         self.heading = QLabel()
@@ -36,7 +36,7 @@ class SimMonitor(QDialog):
         run.clicked.connect(self.start)
         stop = QPushButton("หยุด SIM")
         stop.clicked.connect(panel._simulation_stop)
-        reset = QPushButton("Reset SIM (คืนทูลทั้งหมด)")
+        reset = QPushButton("รีเซ็ตการจำลอง (คืนทูลทั้งหมด)")
         reset.clicked.connect(panel._simulation_home)
         self.fault = QComboBox()
         self.fault.addItem("Sensor ทำงานปกติ", "")

@@ -32,67 +32,67 @@ from .generator import generate_candidate
 
 
 PAGE_TITLES = [
-    "1  Hardware",
-    "2  ATC Type",
+    "1  ฮาร์ดแวร์",
+    "2  ประเภท ATC",
     "3  Magazine",
-    "4  Transfer",
-    "5  Feedback",
-    "6  Spindle M19",
-    "7  I/O Mapping",
-    "8  Review",
+    "4  กลไกส่งทูล",
+    "5  ระบบ Feedback",
+    "6  จัดแนว Spindle (M19)",
+    "7  กำหนด I/O",
+    "8  ตรวจทาน",
 ]
 
 PROFILE_LABELS = {
-    "umbrella-parasol-v1": "Umbrella / Parasol",
-    "rotary-disc-v1": "Rotary Disc / Carousel",
-    "side-mounted-double-arm-v1": "Side-mounted Magazine",
-    "chain-double-arm-v1": "Chain Magazine",
-    "linear-rack-v1": "Linear Rack",
+    "umbrella-parasol-v1": "แมกกาซีนแบบร่ม (Umbrella / Parasol)",
+    "rotary-disc-v1": "จานหมุน (Rotary Disc / Carousel)",
+    "side-mounted-double-arm-v1": "แมกกาซีนด้านข้าง (Side-mounted)",
+    "chain-double-arm-v1": "แมกกาซีนแบบโซ่ (Chain)",
+    "linear-rack-v1": "รางเก็บทูล (Linear Rack)",
 }
 
 TRANSFER_LABELS = {
-    "direct_pickup": "Direct Spindle Pickup",
-    "pot_movement": "Direct Pickup + Moving Pot",
-    "single_arm": "Single Arm / Single Gripper",
-    "double_arm_180": "Double Arm / 180° Exchange",
+    "direct_pickup": "สปินเดิลรับทูลโดยตรง (Direct Pickup)",
+    "pot_movement": "รับทูลโดยตรง + Pot เคลื่อนที่",
+    "single_arm": "แขนเดี่ยว / กริปเปอร์เดี่ยว",
+    "double_arm_180": "แขนคู่ / แลกทูล 180°",
 }
 
 FEEDBACK_LABELS = {
-    "per_pocket": "One Sensor per Pocket",
-    "gray_code": "Gray Code",
-    "binary_code": "Binary Code",
+    "per_pocket": "เซ็นเซอร์แยกทุก Pocket",
+    "gray_code": "รหัส Gray Code",
+    "binary_code": "รหัส Binary",
     "bcd": "BCD",
     "home_index": "Home + Index",
-    "incremental_encoder": "Incremental Encoder",
-    "absolute_encoder": "Absolute Encoder",
-    "drive_in_position": "Drive In-position",
-    "open_loop_step_count": "Open-loop Step Count (มีข้อจำกัด)",
+    "incremental_encoder": "Encoder แบบ Incremental",
+    "absolute_encoder": "Encoder แบบ Absolute",
+    "drive_in_position": "สัญญาณ Drive In-position",
+    "open_loop_step_count": "นับ Step แบบ Open-loop (มีข้อจำกัด)",
 }
 
 BACKEND_LABELS = {
-    "linuxcnc_encoder_pid": "LinuxCNC Encoder + HAL Orient/PID",
-    "servo_native_fixed": "Servo Drive Native — Fixed / Preset",
-    "servo_native_fieldbus": "Servo Drive Native — Fieldbus",
-    "external_controller": "External Orientation Controller",
+    "linuxcnc_encoder_pid": "Encoder LinuxCNC + HAL Orient/PID",
+    "servo_native_fixed": "Servo Drive ควบคุมตำแหน่งในตัว — Fixed / Preset",
+    "servo_native_fieldbus": "Servo Drive ควบคุมตำแหน่งในตัว — Fieldbus",
+    "external_controller": "ตัวควบคุมจัดแนว Spindle ภายนอก",
 }
 
 INTERFACE_LABELS = {
-    "linuxcnc_m19": "LinuxCNC M19 / HAL Interface",
-    "digital_io_fixed_angle": "Digital I/O — Fixed Angle",
-    "preset_select": "Digital I/O — Preset Select",
+    "linuxcnc_m19": "อินเทอร์เฟซ LinuxCNC M19 / HAL",
+    "digital_io_fixed_angle": "Digital I/O — มุมคงที่",
+    "preset_select": "Digital I/O — เลือก Preset",
     "fieldbus_register": "Fieldbus / Register",
-    "serial_command": "Serial / External Protocol",
-    "pulse_direction": "Pulse / Direction Position",
-    "analog_position": "Analog Position (DAC required)",
+    "serial_command": "Serial / Protocol ภายนอก",
+    "pulse_direction": "Pulse / Direction สำหรับควบคุมตำแหน่ง",
+    "analog_position": "สั่งตำแหน่งแบบ Analog (ต้องมี DAC)",
 }
 
 PRESENTATION_LABELS = {
-    "fixed": "Fixed — ไม่มี Pot Motion แยก",
+    "fixed": "ตำแหน่งคงที่ — ไม่มี Pot Motion แยก",
     "pot_lift": "Pot Lift — ยก / ลด",
     "pot_swing": "Pot Swing — แกว่งเข้า / ออก",
     "pot_slide": "Pot Slide — เลื่อนเข้า / ออก",
     "magazine_retract": "Magazine Retract — เลื่อนหลบ",
-    "profile_defined": "Profile-defined Motion",
+    "profile_defined": "กำหนดการเคลื่อนที่ตาม Profile",
 }
 
 
@@ -158,7 +158,7 @@ if _QT_IMPORT_ERROR is None:
             root.setSpacing(10)
 
             header = QHBoxLayout()
-            title = QLabel("LinuxCNC Universal ATC — Setup Wizard")
+            title = QLabel("LinuxCNC Universal ATC — ตัวช่วยตั้งค่า")
             title.setStyleSheet("font-size: 20px; font-weight: 600;")
             self.page_counter = QLabel("ขั้นตอน 1 / 8")
             self.page_counter.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
@@ -166,7 +166,7 @@ if _QT_IMPORT_ERROR is None:
             header.addWidget(self.page_counter)
             root.addLayout(header)
 
-            self.progress = QLabel("Hardware  →  ATC Type  →  Magazine  →  Transfer  →  Feedback  →  M19  →  I/O  →  Review")
+            self.progress = QLabel("ฮาร์ดแวร์  →  ประเภท ATC  →  Magazine  →  กลไกส่งทูล  →  Feedback  →  M19  →  I/O  →  ตรวจทาน")
             self.progress.setStyleSheet("color: #687386; padding: 4px 0;")
             root.addWidget(self.progress)
 
@@ -310,7 +310,7 @@ if _QT_IMPORT_ERROR is None:
                 )
                 form.addRow("นโยบายเลือกทิศทาง", self.direction_policy_combo)
 
-                self.reversible_check = QCheckBox("Drive กลับทิศทางได้")
+                self.reversible_check = QCheckBox("ไดรฟ์สามารถกลับทิศทางได้")
                 self.reversible_check.toggled.connect(lambda value: self._set("atc.magazine.reversible", value))
                 form.addRow("Drive Capability", self.reversible_check)
 
@@ -385,7 +385,7 @@ if _QT_IMPORT_ERROR is None:
                 )
                 form.addRow("Drawbar Verification", self.drawbar_verification_combo)
 
-                self.air_pressure_check = QCheckBox("ต้องตรวจ Air Pressure OK")
+                self.air_pressure_check = QCheckBox("ต้องตรวจสอบแรงดันลม (Air Pressure OK)")
                 self.air_pressure_check.toggled.connect(lambda value: self._set("atc.transfer.drawbar.require_air_pressure", value))
                 form.addRow("Pneumatic Interlock", self.air_pressure_check)
                 layout.insertLayout(2, form)
@@ -415,7 +415,7 @@ if _QT_IMPORT_ERROR is None:
                 )
                 form.addRow("Code Bit Order", self.bit_order_combo)
 
-                self.valid_strobe_check = QCheckBox("มี VALID / STROBE Signal")
+                self.valid_strobe_check = QCheckBox("มีสัญญาณ VALID / STROBE")
                 self.valid_strobe_check.toggled.connect(lambda value: self._set("atc.magazine.position_feedback.has_valid_strobe", value))
                 form.addRow("Code Sampling", self.valid_strobe_check)
 
@@ -489,11 +489,11 @@ if _QT_IMPORT_ERROR is None:
                 )
                 form.addRow("Position Command Resource", self.spindle_position_combo)
 
-                self.zero_speed_check = QCheckBox("ต้องยืนยัน Zero Speed")
+                self.zero_speed_check = QCheckBox("ต้องยืนยันความเร็วเป็นศูนย์ (Zero Speed)")
                 self.zero_speed_check.toggled.connect(lambda value: self._set("atc.spindle_orientation.require_zero_speed", value))
                 form.addRow("Spindle Interlock", self.zero_speed_check)
 
-                self.brake_check = QCheckBox("ต้องมี Brake Engaged Feedback")
+                self.brake_check = QCheckBox("ต้องมี Feedback ยืนยันว่า Brake จับอยู่")
                 self.brake_check.toggled.connect(lambda value: self._set("atc.spindle_orientation.require_brake_feedback", value))
                 form.addRow("Mechanical Brake", self.brake_check)
 
@@ -509,7 +509,7 @@ if _QT_IMPORT_ERROR is None:
                     "Auto-map จัดสรรเฉพาะ Physical DI/DO ที่ Manifest ระบุว่า Available และ Verified; Encoder/Stepgen/Bus เลือกแยกตามชนิด",
                 )
                 actions = QHBoxLayout()
-                auto_button = QPushButton("Auto-map Required / Optional")
+                auto_button = QPushButton("จัดสรร I/O อัตโนมัติ (Required / Optional)")
                 auto_button.clicked.connect(self._auto_map)
                 actions.addWidget(auto_button)
                 actions.addStretch(1)
@@ -523,7 +523,7 @@ if _QT_IMPORT_ERROR is None:
                 self.io_table.setMinimumHeight(260)
                 layout.insertWidget(3, self.io_table, 1)
 
-                resource_group = QGroupBox("Motion / Encoder / Communication Resources")
+                resource_group = QGroupBox("ทรัพยากร Motion / Encoder / Communication")
                 resource_form = QFormLayout(resource_group)
                 self.magazine_stepgen_combo = self._resource_combo("stepgen", "atc.motion_resources.magazine_motion")
                 resource_form.addRow("Magazine Stepgen", self.magazine_stepgen_combo)
@@ -546,10 +546,10 @@ if _QT_IMPORT_ERROR is None:
             layout.insertWidget(2, self.review_text)
 
             buttons = QHBoxLayout()
-            validate_button = QPushButton("Validate Configuration")
+            validate_button = QPushButton("ตรวจสอบ Configuration")
             validate_button.clicked.connect(self._validate)
             buttons.addWidget(validate_button)
-            self.apply_button = QPushButton("Apply → Generate Test Config")
+            self.apply_button = QPushButton("สร้าง Configuration สำหรับทดสอบ")
             self.apply_button.setToolTip(
                 "สร้างสำเนา Axis Simulation พร้อมค่า ATC ในโฟลเดอร์ใหม่เท่านั้น "
                 "ไม่ Apply เข้าเครื่องจริงและไม่สั่ง Physical I/O"
@@ -559,7 +559,7 @@ if _QT_IMPORT_ERROR is None:
             buttons.addWidget(self.apply_button)
             layout.insertLayout(3, buttons)
 
-            self.validation_text = QLabel("ยังไม่ได้ Validate")
+            self.validation_text = QLabel("ยังไม่ได้ตรวจสอบ Configuration")
             self.validation_text.setWordWrap(True)
             self.validation_text.setTextInteractionFlags(Qt.TextSelectableByMouse)
             self.validation_text.setFrameShape(QFrame.StyledPanel)
@@ -862,8 +862,8 @@ if _QT_IMPORT_ERROR is None:
                 self.io_table.setCellWidget(row, 3, resource_combo)
 
                 level_combo = QComboBox()
-                level_combo.addItem("Active High", "high")
-                level_combo.addItem("Active Low", "low")
+                level_combo.addItem("Active High (ระดับสัญญาณสูง)", "high")
+                level_combo.addItem("Active Low (ระดับสัญญาณต่ำ)", "low")
                 current_level = mapping.get(spec["id"], {}).get("active_level", "high")
                 self._set_combo(level_combo, current_level)
                 level_combo.currentIndexChanged.connect(
@@ -918,7 +918,7 @@ if _QT_IMPORT_ERROR is None:
             message = f"Auto-map เสร็จ: Required ที่ยังไม่ได้ Map {len(result['unmapped_required'])} รายการ"
             if result["unmapped_required"]:
                 message += "\n" + ", ".join(result["unmapped_required"])
-            QMessageBox.information(self, "ATC Auto-map", message)
+            QMessageBox.information(self, "จัดสรร I/O ATC อัตโนมัติ", message)
 
         def _refresh_review_summary(self) -> None:
             if not hasattr(self, "review_text"):
@@ -929,19 +929,19 @@ if _QT_IMPORT_ERROR is None:
             spindle = atc["spindle_orientation"]
             profile = self.model.profile
             self.review_text.setText(
-                f"<b>Hardware:</b> {self.model.manifest['identity']['controller_profile']} "
+                f"<b>ฮาร์ดแวร์:</b> {self.model.manifest['identity']['controller_profile']} "
                 f"({self.model.manifest['status'].upper()})<br>"
-                f"<b>ATC:</b> {PROFILE_LABELS.get(profile['id'], profile['name_th'])}<br>"
-                f"<b>Pockets:</b> {magazine['pocket_count']} | Reference: {magazine.get('reference_pocket', 1)} | "
+                f"<b>ประเภท ATC:</b> {PROFILE_LABELS.get(profile['id'], profile['name_th'])}<br>"
+                f"<b>จำนวน Pocket:</b> {magazine['pocket_count']} | จุดอ้างอิง: {magazine.get('reference_pocket', 1)} | "
                 f"Feedback: {FEEDBACK_LABELS.get(magazine['position_feedback']['method'], magazine['position_feedback']['method'])}<br>"
-                f"<b>Transfer:</b> {TRANSFER_LABELS.get(transfer['mechanism'], transfer['mechanism'])} | "
-                f"Presentation: {PRESENTATION_LABELS.get(transfer.get('presentation', {}).get('mode', 'fixed'))}<br>"
-                f"<b>Tool Location:</b> {atc['tool_management']['location_model']}<br>"
+                f"<b>กลไกส่งทูล:</b> {TRANSFER_LABELS.get(transfer['mechanism'], transfer['mechanism'])} | "
+                f"รูปแบบการเคลื่อนที่: {PRESENTATION_LABELS.get(transfer.get('presentation', {}).get('mode', 'fixed'))}<br>"
+                f"<b>ตำแหน่งจัดเก็บ Tool:</b> {atc['tool_management']['location_model']}<br>"
                 f"<b>M19:</b> {BACKEND_LABELS[spindle['backend']]} | "
                 f"{INTERFACE_LABELS[spindle['command_interface']]} | "
-                f"Target: {spindle.get('fixed_angle_deg', 'Variable')}°<br>"
-                f"<b>I/O Mapping:</b> {len(atc['io_mapping'])} assignments<br>"
-                f"<b>Safety:</b> ATC Enable = DISABLED; Live Apply = DISABLED"
+                f"มุมเป้าหมาย: {spindle.get('fixed_angle_deg', 'Variable')}°<br>"
+                f"<b>การกำหนด I/O:</b> {len(atc['io_mapping'])} assignments<br>"
+                f"<b>ความปลอดภัย:</b> ATC Enable = ปิด; Live Apply = ปิด"
             )
 
         def _validate(self) -> None:
@@ -949,9 +949,9 @@ if _QT_IMPORT_ERROR is None:
             self._last_report = report
             summary = report["summary"]
             lines = [
-                f"Configuration Valid: {'YES' if report['configuration_valid'] else 'NO'}",
-                f"Live Apply Allowed: {'YES' if report['live_apply_allowed'] else 'NO'}",
-                f"BLOCKER {summary['blocker']} | ERROR {summary['error']} | WARNING {summary['warning']} | INFO {summary['info']}",
+                f"Configuration ถูกต้อง: {'YES' if report['configuration_valid'] else 'NO'}",
+                f"อนุญาต Live Apply: {'YES' if report['live_apply_allowed'] else 'NO'}",
+                f"รายการขัดขวาง {summary['blocker']} | ข้อผิดพลาด {summary['error']} | คำเตือน {summary['warning']} | ข้อมูล {summary['info']}",
                 "",
             ]
             for finding in report["findings"]:
@@ -970,18 +970,18 @@ if _QT_IMPORT_ERROR is None:
                 )
             elif report["configuration_valid"]:
                 self.status_banner.setText(
-                    "Configuration ผ่านการตรวจเชิงโครงสร้าง — Apply จะสร้าง Axis Simulation สำเนาใหม่เท่านั้น "
-                    "ไม่ใช่ Live Apply และ ATC ยังคง Disabled"
+                    "Configuration ผ่านการตรวจเชิงโครงสร้าง — การสร้าง Candidate จะทำสำเนา Axis Simulation ใหม่เท่านั้น "
+                    "ไม่ใช่ Live Apply และ ATC ยังคงปิดอยู่"
                 )
             else:
                 self.status_banner.setText(
-                    "Configuration ยังมี Error — แก้รายการที่แจ้งก่อนสร้าง Candidate"
+                    "Configuration ยังมีข้อผิดพลาด — กรุณาแก้ไขรายการที่แจ้งก่อนสร้าง Candidate"
                 )
 
         def _apply_candidate(self) -> None:
             report = self._last_report
             if report is None or not report.get("configuration_valid"):
-                QMessageBox.warning(self, "ยัง Apply ไม่ได้", "กรุณา Validate Configuration ใหม่ก่อน")
+                QMessageBox.warning(self, "ยังสร้างคอนฟิกไม่ได้", "กรุณาตรวจสอบ Configuration ใหม่ก่อน")
                 self._invalidate_report()
                 return
             try:
@@ -1024,7 +1024,7 @@ if _QT_IMPORT_ERROR is None:
             except OSError as exc:
                 QMessageBox.critical(self, "บันทึกไม่สำเร็จ", str(exc))
                 return
-            QMessageBox.information(self, "บันทึก Draft", f"บันทึก Configuration แล้ว:\n{saved}")
+            QMessageBox.information(self, "บันทึกฉบับร่าง", f"บันทึก Configuration แล้ว:\n{saved}")
 
         def _change_page(self, index: int) -> None:
             if index < 0 or index >= 8:
@@ -1079,7 +1079,7 @@ if _QT_IMPORT_ERROR is None:
         config = WizardModel.load_config(args.config) if args.config else None
         app = QApplication(sys.argv[:1])
         window = QMainWindow()
-        window.setWindowTitle("LinuxCNC Universal ATC Configurator")
+        window.setWindowTitle("LinuxCNC Universal ATC — ตัวตั้งค่า ATC")
         window.setCentralWidget(
             AtcWizardWidget(
                 data_dir,

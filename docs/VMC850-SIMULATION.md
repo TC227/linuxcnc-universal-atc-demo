@@ -1,4 +1,4 @@
-# VMC850 simulation: QtDragon, Vismach and ATC Monitor
+# การจำลอง VMC850: QtDragon, Vismach และ ATC Monitor
 
 สถานะ ณ 17 พฤศจิกายน 2026: สร้างและเปิดบน Raspberry Pi 4 ที่มี LinuxCNC/QtVCP แล้ว
 รองรับการทดลองผ่าน Desktop หรือ VNC โดยใช้ QtDragon รุ่นปกติ ไม่ใช่ QtDragon HD
